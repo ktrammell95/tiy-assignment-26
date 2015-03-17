@@ -1,6 +1,6 @@
-// kt.views={};
+kt.views={};
 
-// (function(views){
+(function(views){
 
   var PageOne = React.createClass({displayName: "PageOne",
     render: function() {
@@ -25,19 +25,29 @@
       }
     },
 
+    onNav: function(show){
+      this.props.onShow(show);
+    },
+
     render: function() {
       var showing = this.getView(this.props.show);
       return (
-        React.createElement("div", null, showing)
+        React.createElement("div", null, 
+          React.createElement("div", null, 
+            React.createElement("button", {onClick: this.onNav.bind(this,"one")}, "Page One"), 
+            React.createElement("button", {onClick: this.onNav.bind(this,"two")}, "Page Two")
+          ), 
+          React.createElement("div", null, showing)
+        )
       );
     }
 
   });
 
-  $(function(){
+  // $(function(){
 
-    window.page = React.render(React.createElement(PgView, {show: "one"}), document.body);
-  });
-//   views.PgView = PgView;
+  //   window.page = React.render(<PgView show ="one"/>, document.body);
+  // });
+  views.PgView = PgView;
 
-// })(kt.views);
+})(kt.views);
